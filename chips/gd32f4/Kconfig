@@ -2,22 +2,12 @@
 # For a description of the syntax of this configuration file,
 # see the file kconfig-language.txt in the NuttX tools repository.
 #
+# NOTE: This file is not used in compilation.
+# gigadevice is not sourced in vendor/Kconfig and lacks integration.
+#
 
 if ARCH_CHIP_CUSTOM
 
-comment "GD32F4 Configuration Options"
-
-choice
-    prompt "GD32F4 Chip Selection"
-    default ARCH_CHIP_GD32F4
-
-config ARCH_CHIP_GD32F4
-	bool "gd32f4"
-	select ARCH_CORTEXM4
-	select ARCH_HAVE_MPU
-	select ARM_HAVE_MPU_UNIFIED
-	select ARCH_HAVE_FPU
-
-endchoice
+comment "CUSTOM Configuration Options"
 
 endif

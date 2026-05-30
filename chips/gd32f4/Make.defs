@@ -18,19 +18,9 @@
 #
 ############################################################################
 
+# NOTE: This file is not used in compilation.
+# No parent Make.defs includes this file and it contains no build rules.
+
 # We need to select arch Make.defs according to chip arch
 # eg: risc-v/Make.defs, armv8-m/Make.defs
 
-include armv7-m/Make.defs
-
-# Specify our HEAD assembly file.  This will be linked as
-# the first object file, so it will appear at address 0
-
-#HEAD_ASRC = head.S
-
-#CHIP_ASRCS = vectors.S
-
-# Specify our C code within this directory to be included
-
-CHIP_CSRCS += gd32f4_start.c gd32f4_irq.c gd32f4_uart.c
-CHIP_CSRCS += gd32f4_allocateheap.c

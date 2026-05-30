@@ -13,27 +13,25 @@ choice
 
 		Eval COM Port:
 
-		BOARD USART Connector:
-
 		Advantage: You have a shield so it is easy.
 
-		Disadvantage: You loose the use of the
+		Disadvantage: You lose the use of the
 		other functions on PA9, PA10
 
-				GD32F470IK_EVAL
+				GD32F470I_EVAL
 			USART0 GPIO
-			-- ----- --------- ----
+			-- ----- --------- -----
 			RX    USART0_RX PA10
 			TX    USART0_TX PA9
-			-- ----- --------- ---
+			-- ----- --------- -----
 
 config GD32F470I_EVAL_CONSOLE_BOARD
-	bool "Eval Com Connector"
+	bool "Eval COM Connector"
 	select GD32_USART0
 	select USART0_SERIALDRIVER
 
 config GD32F470I_EVAL_CONSOLE_VIRTUAL
-	bool "Virtual ComPort"
+	bool "Virtual COM Port"
 	select GD32_USART3
 	select USART3_SERIALDRIVER
 
@@ -54,7 +52,7 @@ config GD32F470I_EVAL_USE_HXTAL
 config GD32F470I_EVAL_USE_IRC16
 	bool "Use IRC16M as clock source"
 
-endchoice # CPU Frequency
+endchoice # MCU Crystal Selection
 
 config GD32F470I_EVAL_HXTAL_VALUE
 	int "GD32F470I Eval Board Hxtal Value"
@@ -76,16 +74,18 @@ config GD32F470I_EVAL_200MHZ
 config GD32F470I_EVAL_168MHZ
 	bool "168 MHz"
 
-config GD32F470I_EVAL_120MHZ
-	bool "120 MHz"
-
 endchoice # CPU Frequency
 
+config BOARD_LOOPSPERMSEC
+    int "Board loops-per-millisecond"
+    default 13500  if GD32F470I_EVAL_168MHZ
+    default 16100  if GD32F470I_EVAL_200MHZ
+    default 19300  if GD32F470I_EVAL_240MHZ
 
 config GD32F470I_EVAL_GD25_BLOCKMOUNT
 	bool "GD25 serial FLASH auto-mount"
 	default n
-	depends on GD32F4_SPI5 && MTD_GD25
+	depends on NSH_ARCHINIT && GD32F4_SPI5 && MTD_GD25
 	---help---
 		Automatically initialize the GD25 SPI FLASH driver when NSH starts.
 
@@ -233,14 +233,12 @@ endif # GD32F4_TLI_L2
 
 endif # GD32F4_TLI
 
-if GD32F4_DCI
-
-# The upstream nuttx GD32F4_DCI stub has no DMA dependency; enforce it here.
-config GD32F4_DCI_NEEDS_DMA1
-	bool
-	default y
+config GD32F4_DCI
+	bool "DCI (Digital Camera Interface)"
 	select GD32F4_DMA1
 	select ARCH_DMA
+
+if GD32F4_DCI
 
 config GD32F4_DCI_DMA_CHANNEL
 	int "DCI DMA channel selection"
@@ -268,9 +266,11 @@ config GD32F4_DCI_REGDEBUG
 endif # GD32F4_DCI
 
 config GD32F4_CAMPREVIEW
-	bool "Board-level camera preview (OV2640  LCD centre)"
+	bool "Board-level camera preview (OV2640 -> LCD centre)"
 	default n
 	depends on GD32F4_DCI && VIDEO_FB
+	select VIDEO_STREAM
+	select GD32F4_I2C0
 	---help---
 		Start a kernel thread that continuously captures 320x240 RGB565
 		frames from the OV2640 via /dev/video0 and blits them centred on

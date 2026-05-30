@@ -1,6 +1,8 @@
 /****************************************************************************
  * arch/arm/src/gd32f4/hardware/gd32f4xx_exmc.h
  *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.  The
@@ -170,11 +172,9 @@
 #define EXMC_SNCTL_EXMODEN          (1 << 14) /* Extended mode enable */
 #define EXMC_SNCTL_ASYNCWTEN        (1 << 15) /* Wait signal during async */
 
-/* TODO 16-18 */
+#define EXMC_SNCTL_SYNCWR           (1 << 19)  /* Write burst enable */
 
-#define EXMC_SNCTL_SYNCWR         (1 << 19)  /* Write burst enable */
-
-#define FMC_BCR_RSTVALUE         0x000003d2
+#define FMC_BCR_RSTVALUE            0x000003d2
 
 #define EXMC_SNTCFG_ASET_SHIFT     (0)        /* Address setup phase duration */
 #define EXMC_SNTCFG_ASET_MASK      (15 << EXMC_SNTCFG_ASET_SHIFT)
@@ -233,7 +233,7 @@
 #define EXMC_SNWTCFG_WASYNCMOD_SHIFT    (28)      /* Access mode */
 #define EXMC_SNWTCFG_WASYNCMOD_MASK     (3 << EXMC_SNWTCFG_WASYNCMOD_SHIFT)
 #  define EXMC_SNWTCFG_MODE_A       (0 << EXMC_SNWTCFG_WASYNCMOD_SHIFT)
-#  define EXMC_SNWTCFG_MODE_B       (1 << EXMC_SNWTCFG_WASYNCMOD_SHIFT) /* TODO */
+#  define EXMC_SNWTCFG_MODE_B       (1 << EXMC_SNWTCFG_WASYNCMOD_SHIFT)
 #  define EXMC_SNWTCFG_MODE_C       (2 << EXMC_SNWTCFG_WASYNCMOD_SHIFT)
 #  define EXMC_SNWTCFG_MODE_D       (3 << EXMC_SNWTCFG_WASYNCMOD_SHIFT)
 
@@ -359,18 +359,18 @@
  */
 #define EXMC_SDCMD_RESERVED                     (0x3ff << 22)  /* reserved bits */
 #define EXMC_SDCMR_MDR_BURST_LENGTH_1              ((0 << 0) << 9)
-#define EXMC_SDCMR_MDR_BURST_LENGTH_2              ((1 << 0) << 9)//TODO
+#define EXMC_SDCMR_MDR_BURST_LENGTH_2              ((1 << 0) << 9)
 #define EXMC_SDCMR_MDR_BURST_LENGTH_4              ((2 << 0) << 9)
 #define EXMC_SDCMR_MDR_BURST_LENGTH_8              ((3 << 0) << 9)
 #define EXMC_SDCMR_MDR_BURST_LENGTH_FULL           ((7 << 0) << 9)
-#define EXMC_SDCMR_MDR_BURST_TYPE_SEQUENTIAL       ((0 << 3) << 9)//TODO
+#define EXMC_SDCMR_MDR_BURST_TYPE_SEQUENTIAL       ((0 << 3) << 9)
 #define EXMC_SDCMR_MDR_BURST_TYPE_INTERLEAVE       ((1 << 3) << 9)
-#define EXMC_SDCMR_MDR_CAS_LATENCY_1               ((1 << 4) << 9)//TODO
+#define EXMC_SDCMR_MDR_CAS_LATENCY_1               ((1 << 4) << 9)
 #define EXMC_SDCMR_MDR_CAS_LATENCY_2               ((2 << 4) << 9)
 #define EXMC_SDCMR_MDR_CAS_LATENCY_3               ((3 << 4) << 9)
 #define EXMC_SDCMR_MDR_MODE_NORMAL                 ((0 << 7) << 9)
 #define EXMC_SDCMR_MDR_WBL_BURST                   ((0 << 9) << 9)
-#define EXMC_SDCMR_MDR_WBL_SINGLE                  ((1 << 9) << 9)//TODO
+#define EXMC_SDCMR_MDR_WBL_SINGLE                  ((1 << 9) << 9)
 #define EXMC_SDCMD_NARF(n)                         (((n & 15) - 1) << 5)
 #define EXMC_SDCMD_DS0                         (1 << 4)
 #define EXMC_SDCMD_DS1                         (1 << 3)

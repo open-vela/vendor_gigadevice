@@ -1,6 +1,8 @@
 /****************************************************************************
  * vendor/gigadevice/boards/gd32f4/gd32f470i_eval/include/board.h
  *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.  The
@@ -92,8 +94,9 @@
 #define GD32_PLL_PLLPSC            RCU_PLL_PLLPSC(25)
 #define GD32_PLL_PLLN              RCU_PLL_PLLN(400)
 #define GD32_PLL_PLLP              RCU_PLL_PLLP(2)
-#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(7)
+#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(8)
 
+/* When SYSCLK is 200 MHz, USB can use IRC48M as clock source */
 #define GD32_SYSCLK_FREQUENCY      200000000ul
 
 #elif defined(CONFIG_GD32F470I_EVAL_168MHZ)
@@ -136,20 +139,20 @@
 #define GD32_PLL_PLLPSC            RCU_PLL_PLLPSC(25)
 #define GD32_PLL_PLLN              RCU_PLL_PLLN(480)
 #define GD32_PLL_PLLP              RCU_PLL_PLLP(2)
-#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(7)
+#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(10)
 
 #define GD32_SYSCLK_FREQUENCY      240000000ul
 
 #else
 
-/* Default: 200 MHz */
+/* Default: 240 MHz */
 
 #define GD32_PLL_PLLPSC            RCU_PLL_PLLPSC(25)
-#define GD32_PLL_PLLN              RCU_PLL_PLLN(400)
+#define GD32_PLL_PLLN              RCU_PLL_PLLN(480)
 #define GD32_PLL_PLLP              RCU_PLL_PLLP(2)
-#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(7)
+#define GD32_PLL_PLLQ              RCU_PLL_PLLQ(10)
 
-#define GD32_SYSCLK_FREQUENCY      200000000ul
+#define GD32_SYSCLK_FREQUENCY      240000000ul
 
 #endif
 
@@ -275,7 +278,7 @@ typedef enum
 
 /* USART3: RX=PC11, TX=PC10 (USB virtual COM port) */
 
-#if defined(GD32F470IK_EVAL_CONSOLE_VIRTUAL)
+#if defined(CONFIG_GD32F470I_EVAL_CONSOLE_VIRTUAL)
 #  define GPIO_USART3_RX GPIO_USART3_RX_3
 #  define GPIO_USART3_TX GPIO_USART3_TX_3
 #endif
@@ -358,14 +361,16 @@ typedef enum
 
 /* TLI PLL configuration
  *
- * PLLSAI_VCO = GD32_HXTAL_FREQUENCY / PLLM
- *            = 8000000ul / 8
- *            = 1,000,000
+ * PLLSAI shares PLLM with the main PLL (PLLM = 25 for this board).
+ *
+ * PLLSAI_VCO = GD32_HXTAL_VALUE / PLLM * PLLSAIN
+ *            = 25,000,000 / 25 * 192
+ *            = 192,000,000
  *
  * PLL LCD clock output
- *            = PLLSAI_VCO * PLLSAIN / PLLSAIR / PLLSAIDIVR
- *            = 1,000,000 * 192 / 4 /8
- *            = 6,000,000
+ *            = PLLSAI_VCO / PLLSAIR / PLLSAIRDIV
+ *            = 192,000,000 / 3 / 8
+ *            = 8,000,000
  */
 
 /* Defined panel settings */
@@ -373,7 +378,7 @@ typedef enum
 #  define BOARD_TLI_WIDTH              480
 #  define BOARD_TLI_HEIGHT             272
 
-#  define BOARD_TLI_OUTPUT_BPP           16 /* TODO */
+#  define BOARD_TLI_OUTPUT_BPP           16
 #  define BOARD_TLI_HFP                  2
 #  define BOARD_TLI_HBP                  2
 #  define BOARD_TLI_VFP                  2
@@ -494,6 +499,12 @@ typedef enum
 #define GD32_RCU_PLLSAI_PLLSAIP    RCU_PLLSAI_PLLSAIP(BOARD_TLI_PLLSAIP)
 #define GD32_RCU_PLLSAI_PLLSAIR    RCU_PLLSAI_PLLSAIR(BOARD_TLI_PLLSAIR)
 /* #define GD32_RCU_PLLSAI_PLLSAIQ    RCU_PLLSAI_PLLSAIQ(BOARD_TLI_PLLSAIQ) */
+
+#if defined(CONFIG_GD32F4_TLI) && defined(CONFIG_HEAP2_BASE)
+#  if (CONFIG_HEAP2_BASE + CONFIG_HEAP2_SIZE) > CONFIG_GD32F4_TLI_FB_BASE
+#    error "HEAP2 region overlaps TLI framebuffer"
+#  endif
+#endif
 
 #endif /* CONFIG_GD32F4_TLI */
 
