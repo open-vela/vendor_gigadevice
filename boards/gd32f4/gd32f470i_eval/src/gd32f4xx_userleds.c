@@ -65,14 +65,14 @@ static const uint32_t g_led_setmap[BOARD_LEDS] =
 
 /* Turn on selected led */
 
-static void gd32_eval_led_on(led_typedef_enum led_num)
+void gd32_eval_led_on(led_typedef_enum led_num)
 {
   gd32_gpio_write(g_led_map[led_num], true);
 }
 
 /* Turn off selected led */
 
-static void gd32_eval_led_off(led_typedef_enum led_num)
+void gd32_eval_led_off(led_typedef_enum led_num)
 {
   gd32_gpio_write(g_led_map[led_num], false);
 }

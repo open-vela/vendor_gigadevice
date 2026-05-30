@@ -1,6 +1,8 @@
 /****************************************************************************
  * arch/arm/src/gd32f4/hardware/gd32f4xx_tli.h
  *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.  The
@@ -261,12 +263,12 @@
 #define TLI_LXCKEY_CKEYB_SHIFT    (0)       /* Bits 0-7: Color Key Blue Value */
 #define TLI_LXCKEY_CKEYB_MASK     (0xff << TLI_LXCKEY_CKEYB_SHIFT)
 #  define TLI_LXCKEY_CKEYB(n)     ((uint32_t)(n) << TLI_LXCKEY_CKEYB_SHIFT)
-#define TLI_LXCKEY_CKEYG_SHIFT   (8)       /* Bits 8-15: Color Key Green Value */
-#define TLI_LXCKEY_CKEYG_MASK    (0xff << TLI_LXCKEY_CKEYG_SHIFT)
-#  define TLI_LXCKEY_CKEYG(n)    ((uint32_t)(n) << TLI_LXCKEY_CKEYG_SHIFT)
-#define TLI_LXCKEY_CKEYR_SHIFT     (16)       /* Bits 16-23: Color Key Red Value */
-#define TLI_LXCKEY_CKEYR_MASK      (0xff << TLI_LXCKEY_CKEYR_SHIFT)
-#  define TLI_LXCKEY_CKEYR(n)      ((uint32_t)(n) << TLI_LXCKEY_CKEYR_SHIFT)
+#define TLI_LXCKEY_CKEYG_SHIFT    (8)       /* Bits 8-15: Color Key Green Value */
+#define TLI_LXCKEY_CKEYG_MASK     (0xff << TLI_LXCKEY_CKEYG_SHIFT)
+#  define TLI_LXCKEY_CKEYG(n)     ((uint32_t)(n) << TLI_LXCKEY_CKEYG_SHIFT)
+#define TLI_LXCKEY_CKEYR_SHIFT    (16)       /* Bits 16-23: Color Key Red Value */
+#define TLI_LXCKEY_CKEYR_MASK     (0xff << TLI_LXCKEY_CKEYR_SHIFT)
+#  define TLI_LXCKEY_CKEYR(n)     ((uint32_t)(n) << TLI_LXCKEY_CKEYR_SHIFT)
 
 /* TLI Layer x Pixel Format Configuration Register */
 
@@ -294,15 +296,15 @@
 #define TLI_LXDC_DCB_SHIFT    (0)       /* Bits 0-7: Default Color Blue Value */
 #define TLI_LXDC_DCB_MASK     (0xff << TLI_LXDC_DCB_SHIFT)
 #  define TLI_LXDC_DCB(n)     ((uint32_t)(n) << TLI_LXDC_DCB_SHIFT)
-#define TLI_LXDC_DCG_SHIFT   (8)       /* Bits 8-15: Default Color Green Value */
-#define TLI_LXDC_DCG_MASK    (0xff << TLI_LXDC_DCG_SHIFT)
-#  define TLI_LXDC_DCG(n)    ((uint32_t)(n) << TLI_LXDC_DCG_SHIFT)
-#define TLI_LXDC_DCR_SHIFT     (16)       /* Bits 16-23: Default Color Red Value */
-#define TLI_LXDC_DCR_MASK      (0xff << TLI_LXDC_DCR_SHIFT)
-#  define TLI_LXDC_DCR(n)      ((uint32_t)(n) << TLI_LXDC_DCR_SHIFT)
-#define TLI_LXDC_DCA_SHIFT   (24)       /* Bits 24-31: Default Color Alpha Value */
-#define TLI_LXDC_DCA_MASK    (0xff << TLI_LXDC_DCA_SHIFT)
-#  define TLI_LXDC_DCA(n)    ((uint32_t)(n) << TLI_LXDC_DCA_SHIFT)
+#define TLI_LXDC_DCG_SHIFT    (8)       /* Bits 8-15: Default Color Green Value */
+#define TLI_LXDC_DCG_MASK     (0xff << TLI_LXDC_DCG_SHIFT)
+#  define TLI_LXDC_DCG(n)     ((uint32_t)(n) << TLI_LXDC_DCG_SHIFT)
+#define TLI_LXDC_DCR_SHIFT    (16)       /* Bits 16-23: Default Color Red Value */
+#define TLI_LXDC_DCR_MASK     (0xff << TLI_LXDC_DCR_SHIFT)
+#  define TLI_LXDC_DCR(n)     ((uint32_t)(n) << TLI_LXDC_DCR_SHIFT)
+#define TLI_LXDC_DCA_SHIFT    (24)       /* Bits 24-31: Default Color Alpha Value */
+#define TLI_LXDC_DCA_MASK     (0xff << TLI_LXDC_DCA_SHIFT)
+#  define TLI_LXDC_DCA(n)     ((uint32_t)(n) << TLI_LXDC_DCA_SHIFT)
 
 /* TLI Layer x Blending Factors Configuration Register */
 
@@ -323,9 +325,9 @@
 #define TLI_LXFLLEN_FLL_SHIFT    (0)       /* Bits 0-12: Color Frame Buffer Line Length */
 #define TLI_LXFLLEN_FLL_MASK     (0x1fff << TLI_LXFLLEN_FLL_SHIFT)
 #  define TLI_LXFLLEN_FLL(n)     ((uint32_t)(n) << TLI_LXFLLEN_FLL_SHIFT)
-#define TLI_LXFLLEN_STDOFF_SHIFT     (16)       /* Bits 16-28: Color Frame Buffer Pitch */
-#define TLI_LXFLLEN_STDOFF_MASK      (0x1fff << TLI_LXFLLEN_STDOFF_SHIFT)
-#  define TLI_LXFLLEN_STDOFF(n)      ((uint32_t)(n) << TLI_LXFLLEN_STDOFF_SHIFT)
+#define TLI_LXFLLEN_STDOFF_SHIFT (16)       /* Bits 16-28: Color Frame Buffer Pitch */
+#define TLI_LXFLLEN_STDOFF_MASK  (0x1fff << TLI_LXFLLEN_STDOFF_SHIFT)
+#  define TLI_LXFLLEN_STDOFF(n)  ((uint32_t)(n) << TLI_LXFLLEN_STDOFF_SHIFT)
 
 /* TLI Layer x Color Frame Buffer Line Number Register */
 
@@ -338,15 +340,15 @@
 #define TLI_LXLUT_TB_SHIFT    (0)       /* Bits 0-7: Default Color Blue Value */
 #define TLI_LXLUT_TB_MASK     (0xff << TLI_LXLUT_TB_SHIFT)
 #  define TLI_LXLUT_TB(n)     ((uint32_t)(n) << TLI_LXLUT_TB_SHIFT)
-#define TLI_LXLUT_TG_SHIFT   (8)       /* Bits 8-15: Default Color Green Value */
-#define TLI_LXLUT_TG_MASK    (0xff << TLI_LXLUT_TG_SHIFT)
-#  define TLI_LXLUT_TG(n)    ((uint32_t)(n) << TLI_LXLUT_TG_SHIFT)
-#define TLI_LXLUT_TR_SHIFT     (16)       /* Bits 16-23: Default Color Red Value */
-#define TLI_LXLUT_TR_MASK      (0xff << TLI_LXLUT_TR_SHIFT)
-#  define TLI_LXLUT_TR(n)      ((uint32_t)(n) << TLI_LXLUT_TR_SHIFT)
-#define TLI_LXLUT_TADD_SHIFT (24)       /* Bits 24-31: CLUT Address */
-#define TLI_LXLUT_TADD_MASK  (0xff << TLI_LXLUT_TADD_SHIFT)
-#  define TLI_LXLUT_TADD(n)  ((uint32_t)(n) << TLI_LXLUT_TADD_SHIFT)
+#define TLI_LXLUT_TG_SHIFT    (8)       /* Bits 8-15: Default Color Green Value */
+#define TLI_LXLUT_TG_MASK     (0xff << TLI_LXLUT_TG_SHIFT)
+#  define TLI_LXLUT_TG(n)     ((uint32_t)(n) << TLI_LXLUT_TG_SHIFT)
+#define TLI_LXLUT_TR_SHIFT    (16)       /* Bits 16-23: Default Color Red Value */
+#define TLI_LXLUT_TR_MASK     (0xff << TLI_LXLUT_TR_SHIFT)
+#  define TLI_LXLUT_TR(n)     ((uint32_t)(n) << TLI_LXLUT_TR_SHIFT)
+#define TLI_LXLUT_TADD_SHIFT  (24)       /* Bits 24-31: CLUT Address */
+#define TLI_LXLUT_TADD_MASK   (0xff << TLI_LXLUT_TADD_SHIFT)
+#  define TLI_LXLUT_TADD(n)   ((uint32_t)(n) << TLI_LXLUT_TADD_SHIFT)
 
 /****************************************************************************
  * Public Types

@@ -1,6 +1,12 @@
 /****************************************************************************
  * arch/arm/src/gd32f4/gd32f4xx_tli.c
  *
+ * Derived from: apache/nuttx arch/arm/src/stm32f4/stm32_ltdc.c
+ * Original Authors: <names from upstream NOTICE/AUTHORS>
+ *
+ * Modifications: ported to GD32F4 TLI peripheral by GigaDevice.
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.  The
@@ -17,10 +23,6 @@
  * under the License.
  *
  ****************************************************************************/
-
-/* References:
- *   GD32F4xx User Manual
- */
 
 /****************************************************************************
  * Included Files
@@ -128,10 +130,10 @@
 
 /* Dither */
 
-#define GD32_TLI_CTL_DFEN BOARD_TLI_CTL_DFEN            /* TODO */
-#define GD32_TLI_CTL_BDB TLI_CTL_BDB(BOARD_TLI_CTL_BDB) /* TODO */
-#define GD32_TLI_CTL_GDB TLI_CTL_GDB(BOARD_TLI_CTL_GDB) /* TODO */
-#define GD32_TLI_CTL_RDB TLI_CTL_BDB(BOARD_TLI_CTL_RDB) /* TODO */
+#define GD32_TLI_CTL_DFEN BOARD_TLI_CTL_DFEN
+#define GD32_TLI_CTL_BDB TLI_CTL_BDB(BOARD_TLI_CTL_BDB)
+#define GD32_TLI_CTL_GDB TLI_CTL_GDB(BOARD_TLI_CTL_GDB)
+#define GD32_TLI_CTL_RDB TLI_CTL_RDB(BOARD_TLI_CTL_RDB)
 
 /* LIPCR register */
 
@@ -181,7 +183,7 @@
 #define GD32_TLI_L2_COLOR_FMT FB_FMT_RGB8
 #define GD32_TLI_L2PPF_PF TLI_LXPPF_PPF(TLI_PF_L8)
 #define GD32_TLI_L2_IPA_PF IPA_PF_L8
-#define GD32_LTLI_L2CMAP
+#define GD32_TLI_L2CMAP
 #elif defined(CONFIG_GD32F4_TLI_L2_RGB565)
 #define GD32_TLI_L2_BPP 16
 #define GD32_TLI_L2_COLOR_FMT FB_FMT_RGB16_565
@@ -472,7 +474,7 @@
 #define GD32_LAYER_CLUT_SIZE GD32_TLI_NCLUT * 3 * sizeof(uint8_t)
 #endif
 #endif
-#ifdef GD32_LTLI_L2CMAP
+#ifdef GD32_TLI_L2CMAP
 #undef GD32_LAYER_CLUT_SIZE
 #ifdef CONFIG_GD32F4_FB_TRANSPARENCY
 #define GD32_LAYER_CLUT_SIZE GD32_TLI_NCLUT * sizeof(uint32_t) * 2
@@ -483,9 +485,9 @@
 #endif
 
 #ifndef CONFIG_GD32F4_FB_CMAP
-#if defined(GD32_TLI_L1CMAP) || defined(GD32_LTLI_L2CMAP)
+#if defined(GD32_TLI_L1CMAP) || defined(GD32_TLI_L2CMAP)
 #undef GD32_TLI_L1CMAP
-#undef GD32_LTLI_L2CMAP
+#undef GD32_TLI_L2CMAP
 #error "Enable cmap to support the configured layer format!"
 #endif
 #endif
@@ -1494,8 +1496,8 @@ static void gd32_tli_linepos(void)
   /* Configure TLI_LIPCR */
 
   reginfo("set TLI_LM_LM=%08x\n", GD32_TLI_LM_LM);
-  putreg32(GD32_TLI_LM_LM, GD32_TLI_LM_LM);
-  reginfo("configured TLI_LM_LM=%08x\n", getreg32(GD32_TLI_LM_LM));
+  putreg32(GD32_TLI_LM_LM, GD32_TLI_LM);
+  reginfo("configured TLI_LM_LM=%08x\n", getreg32(GD32_TLI_LM));
 }
 
 /****************************************************************************
@@ -1580,7 +1582,7 @@ static int gd32_tliirq(int irq, void *context, void *arg)
     }
   else
     {
-      DEBUGASSERT("Unknown interrupt");
+      DEBUGPANIC();   /* unreachable: unknown TLI interrupt */
     }
 
   /* Unlock the semaphore if locked */
@@ -1660,7 +1662,7 @@ static int gd32_tli_reload(uint8_t value, bool waitvblank)
     }
   else
     {
-      /* Wait until register reload hase been done */
+      /* Wait until register reload has been done */
 
       while (getreg32(GD32_TLI_RL) & value)
         ;

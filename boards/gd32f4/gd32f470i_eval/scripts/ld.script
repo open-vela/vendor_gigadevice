@@ -20,7 +20,7 @@
  *
  ****************************************************************************/
 
-/* The GD32F470ZKT6 has 3072Kb of FLASH beginning at address 0x0800:0000 and
+/* The GD32F470IZKT6 has 3072Kb of FLASH beginning at address 0x0800:0000 and
  * 256Kb of SRAM. SRAM is split up into four blocks:
  *
  * 1) 112Kb of SRAM beginning at address 0x2000:0000
@@ -37,7 +37,8 @@
 MEMORY
 {
   flash (rx) : ORIGIN = 0x08000000, LENGTH = 3072K
-  sram (rwx) : ORIGIN = 0x20000000, LENGTH = 112K
+  sram (rwx) : ORIGIN = 0x20000000, LENGTH = 192K
+  tcm  (rwx) : ORIGIN = 0x10000000, LENGTH = 64K   /* CPU-only, no DMA */
 }
 
 OUTPUT_ARCH(arm)

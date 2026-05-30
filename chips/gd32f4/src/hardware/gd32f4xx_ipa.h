@@ -1,6 +1,8 @@
 /****************************************************************************
  * arch/arm/src/gd32f4/hardware/gd32f4xx_ipa.h
  *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.  The
@@ -121,12 +123,6 @@
 
 /* IPA Foreground/Background Offset Register */
 
-/* TODO:
- * #define IPA_XGOR_SHIFT              (0)       Bits 0-13 Line Offset
- * #define IPA_XGOR_MASK               (0x3fff << IPA_XGOR_SHIFT)
- * #define IPA_XGOR(n)                 ((uint32_t)(n) << IPA_XGOR_SHIFT)
- */
-
 /* IPA Foreground/Background PFC Control Register */
 
 #define IPA_FPCTL_FPF_SHIFT      (0)      /* Bits 0-3 Color Mode */
@@ -138,11 +134,11 @@
 #define IPA_FPCTL_FCNP_MASK      (0xff << IPA_FPCTL_FCNP_SHIFT)
 #define IPA_FPCTL_FCNP(n)        ((uint32_t)(n) << IPA_FPCTL_FCNP_SHIFT)
 #define IPA_FPCTL_FAVCA_SHIFT    (16)      /* Bits 16-17 Alpha Mode */
-#define IPA_FPCTL_FAVCA_MASK       (3 << IPA_FPCTL_FAVCA_SHIFT)
-#define IPA_FPCTL_FAVCA(n)         ((uint32_t)(n) << IPA_FPCTL_FAVCA_SHIFT)
-#define IPA_FPCTL_FPDAV_SHIFT   (24)     /* Bits 24-31 Alpha Value */
-#define IPA_FPCTL_FPDAV_MASK    (0xff << IPA_FPCTL_FPDAV_SHIFT)
-#define IPA_FPCTL_FPDAV(n)      ((uint32_t)(n) << IPA_FPCTL_FPDAV_SHIFT)
+#define IPA_FPCTL_FAVCA_MASK     (3 << IPA_FPCTL_FAVCA_SHIFT)
+#define IPA_FPCTL_FAVCA(n)       ((uint32_t)(n) << IPA_FPCTL_FAVCA_SHIFT)
+#define IPA_FPCTL_FPDAV_SHIFT    (24)     /* Bits 24-31 Alpha Value */
+#define IPA_FPCTL_FPDAV_MASK     (0xff << IPA_FPCTL_FPDAV_SHIFT)
+#define IPA_FPCTL_FPDAV(n)       ((uint32_t)(n) << IPA_FPCTL_FPDAV_SHIFT)
 
 /* IPA PFC alpha mode */
 
@@ -155,12 +151,12 @@
 #define IPA_FPV_FPDBV_SHIFT     (0)      /* Bits 0-7 Blue Value */
 #define IPA_FPV_FPDBV_MASK      (0xff << IPA_FPV_FPDBV_SHIFT)
 #define IPA_FPV_FPDBV(n)        ((uint32_t)(n) << IPA_FPV_FPDBV_SHIFT)
-#define IPA_FPV_FPDGV_SHIFT    (8)      /* Bits 8-15 Green Value */
-#define IPA_FPV_FPDGV_MASK     (0xff << IPA_FPV_FPDGV_SHIFT)
-#define IPA_FPV_FPDGV(n)       ((uint32_t)(n) << IPA_FPV_FPDGV_SHIFT)
-#define IPA_FPV_FPDRV_SHIFT      (16)     /* Bits 16-23 Red Value */
-#define IPA_FPV_FPDRV_MASK       (0xff << IPA_FPV_FPDRV_SHIFT)
-#define IPA_FPV_FPDRV(n)         ((uint32_t)(n) << IPA_FPV_FPDRV_SHIFT)
+#define IPA_FPV_FPDGV_SHIFT     (8)      /* Bits 8-15 Green Value */
+#define IPA_FPV_FPDGV_MASK      (0xff << IPA_FPV_FPDGV_SHIFT)
+#define IPA_FPV_FPDGV(n)        ((uint32_t)(n) << IPA_FPV_FPDGV_SHIFT)
+#define IPA_FPV_FPDRV_SHIFT     (16)     /* Bits 16-23 Red Value */
+#define IPA_FPV_FPDRV_MASK      (0xff << IPA_FPV_FPDRV_SHIFT)
+#define IPA_FPV_FPDRV(n)        ((uint32_t)(n) << IPA_FPV_FPDRV_SHIFT)
 
 /* IPA Foreground CLUT Memory Address Register */
 #define IPA_FLMADDR_FLMADDR_SHIFT     (0)      /* Bits 0-31 Memory Address */
@@ -173,12 +169,6 @@
 #define IPA_BLMADDR_BLMADDR(n)        ((uint32_t)(n) << IPA_BLMADDR_BLMADDR_SHIFT)
 
 /* IPA Output PFC Control Register */
-
-/* TODO:
- * #define IPA_DPCTL_CM_SHIFT     (0)  Bits 0-2 Color Mode
- * #define IPA_DPCTL_CM_MASK      (7 << IPA_DPCTL_CM_SHIFT)
- * #define IPA_DPCTL_CM(n)        ((uint32_t)(n) << IPA_DPCTL_CM_SHIFT)
- */
 
 #define IPA_DPCTL_DPF_SHIFT       (0)  /* Bits 0-2 Color Mode */
 #define IPA_DPCTL_DPF_MASK        (7 << IPA_DPCTL_DPF_SHIFT)
@@ -213,8 +203,6 @@
 #define IPA_DPV_DPDAV_MASK          (0xff << IPA_DPV_DPDAV_SHIFT)
 #define IPA_DPV_DPDAV(n)            ((uint32_t)(n) << IPA_DPV_DPDAV_SHIFT)
 
-/* TODO */
-
 /* IPA Output Memory Address Register */
 #define IPA_DMADDR_DMADDR_SHIFT     (0)      /* Bits 0-31 Memory Address */
 #define IPA_DMADDR_DMADDR_MASK      (0xffffffffu << IPA_DMADDR_DMADDR_SHIFT)
@@ -231,9 +219,9 @@
 #define IPA_IMS_HEIGHT_SHIFT          (0)      /* Bits 0-15 Number Of Lines */
 #define IPA_IMS_HEIGHT_MASK           (0xffff << IPA_IMS_HEIGHT_SHIFT)
 #define IPA_IMS_HEIGHT(n)             ((uint32_t)(n) << IPA_IMS_HEIGHT_SHIFT)
-#define IPA_IMS_WIDTH_SHIFT          (16)     /* Bits 16-29 Pixel per Lines */
-#define IPA_IMS_WIDTH_MASK           (0x3fff << IPA_IMS_WIDTH_SHIFT)
-#define IPA_IMS_WIDTH(n)             ((uint32_t)(n) << IPA_IMS_WIDTH_SHIFT)
+#define IPA_IMS_WIDTH_SHIFT           (16)     /* Bits 16-29 Pixel per Lines */
+#define IPA_IMS_WIDTH_MASK            (0x3fff << IPA_IMS_WIDTH_SHIFT)
+#define IPA_IMS_WIDTH(n)              ((uint32_t)(n) << IPA_IMS_WIDTH_SHIFT)
 
 /* IPA Line Watermark Register */
 
